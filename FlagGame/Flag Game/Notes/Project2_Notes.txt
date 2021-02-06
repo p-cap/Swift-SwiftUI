@@ -1,0 +1,58 @@
+Embed the current ViewController into a NavigationController
+
+insert 3 butttons with a size of 200 x 100
+
+Go to the size inspector to adjust Y position of the butttons
+
+CTRL drag from the buttons to see the following options for auto layout
+
+Uitlize choose “Top Space to Safe Area“ and "Center Horizontally in Safe Area.”
+
+Drag the flag images onto Assets.xcassets
+
+iOS looks for the  dragged images that are for retina display and non-retina display
+
+Insrt an image inside the button using the attribute inspector
+
+When aligning images, utilize the ctrl drag option to align to the elemnents above or below
+
+Resolve Auto Layout Issue > Update Frames
+
+---> Interface Builder is responsible for the attributes of the button and stuff
+
+Create IBOutletes for 3 of the buttons 
+
+Declare a countries array and assign inside the viewdidload
+
+create a function that statically assign the buttons with images (UIImage)
+
+and call the function inside viewdidload
+
+  --> UIView 
+      --> UIButton
+      --> UIView
+      --> CALayer
+
+adding border to the button but the syntax below DOES NOT WORK
+//        button1.layer.borderColor = UIColor.lightGray.cgColor
+//        button2.layer.borderColor = UIColor.lightGray.cgColor
+//        button3.layer.borderColor = UIColor.lightGray.cgColor
+
+use the shuffle method to randomize the array
+
+and then, have a correct answer variable to randomize the numbers
+
+The correct answer now becomes the title of the page
+
+Create an IBAction function and connect all three buttons to the same IBAction function
+
+
+NOTE: The difference between @IBOutlet and @IBAction 
+--> @IBAction is a way making storyboard layouts trigger code
+--> @IBOutlet is a away of connecting code to storyboard layouts
+
+Assign tags to each button via attributes inspector 
+
+Compare sender tag to the correct answer
+
+
