@@ -1,0 +1,176 @@
+// View Controller
+
+import UIKit
+
+
+// could not remember how to configure a UITableViewController?????
+// I think I inserted a table view
+// how to link between the DetailViewController and the TableViewController??
+  I forgot to assign a class to the DetailViewController which allowed me to add a IBOulet 
+  onto the DetailViewController
+
+
+class ViewController: UITableViewController {
+
+    var pictures = [String]()
+    
+    // this overrieds the viewDidLoad UIViewController function
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = "Storm Viewer"
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let fm = FileManager.default
+        
+        let path = Bundle.main.resourcePath!
+        let items = try! fm.contentsOfDirectory(atPath: path)
+        
+      
+        print(pictures)
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return pictures.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
+        
+        cell.textLabel?.text = pictures[indexPath.row]
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController {
+            
+            vc.selectedImage = pictures[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
+
+
+
+
+// DetailViewController
+
+import UIKit
+
+class DetailViewController: UIViewController {
+
+    @IBOutlet var imageView: UIImageView!
+    var selectedImage: String?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = selectedImage
+        
+        navigationItem.largeTitleDisplayMode = .never
+        
+        if let imageToLoad = selectedImage {
+            imageView.image = UIImage(named: imageToLoad)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnTap = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.hidesBarsOnTap = false
+    }
+
+
+    Main StoryBoard configuration
+
+// Table View cell
+
+  TableViewIdentifier  = Picture
+  Accessory = Disclosure Indicator
+
+// DetailViewController
+
+StoryBoard id = Detail
+
+
+When creating a new Project, 
+
+1. Make sure you have a project name
+2. InterfACE =  StoryBoard
+3. LifeCycle = UIKit App Delegate
+4. Language = Swift
+5. Assign your ViewController to a TableViewController class
+5. Start by creating a UITableViewController
+   => Use the plus sign to add a UITableViewController
+   => Go to your editor......IB...assign the custom class to your ViewController
+
+6. Set as initial ViewController
+7> Embed your ViewController into a navigationController
+8. Set the title under viewDidLoad function inside the ViewController
+  title = "????"
+
+9. set your title as a large title of the ViewController
+         navigationController?.navigationBar.prefersLargeTitles = true
+
+10. Assign a variable to navigate through the file structrure
+   let fm = FileManager.default
+
+11. Establish the path on where the filemanager will look
+          let path = Bundle.main.resourcePath!
+
+12. Stored the found items in an array 
+          let items = try! fm.contentsOfDirectory(atPath: path)
+13. and then iterate through them
+
+14. override through the UITableViewController functions to customize your table
+
+
+IMPORTANT!!!!
+15. link the rows within the TableViewController with the DetailViewController
+
+      override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            
+            if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController {
+                
+                vc.selectedImage = pictures[indexPath.row]
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+
+16. ADD TO THE DetailViewController
+
+        title = selectedImage
+        
+
+        // not inherit the large text from the parent view
+        navigationItem.largeTitleDisplayMode = .never
+        
+        // display image
+        if let imageToLoad = selectedImage {
+            imageView.image = UIImage(named: imageToLoad)
+        }
+
+17. Below is a cool feature to add 
+
+  override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(animated)
+         navigationController?.hidesBarsOnTap = true
+     }
+
+     override func viewWillDisappear(_ animated: Bool) {
+         super.viewWillDisappear(animated)
+         navigationController?.hidesBarsOnTap = false
+     }
+
+     Above will allow you to annimate your back buttons
+
+  18. You can customize the image with by changing the content mode from Aspect Fit to maybe Aspect Fill
+
+  
