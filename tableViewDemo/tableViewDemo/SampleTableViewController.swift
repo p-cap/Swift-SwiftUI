@@ -34,7 +34,7 @@ class SampleTableViewController: UITableViewController {
 
         navigationItem.searchController = searchController
 
-        definesPresentationContext = true
+//        definesPresentationContext = true
     }
 
     // MARK: - Table view data source
@@ -92,7 +92,7 @@ class SampleTableViewController: UITableViewController {
 
 extension SampleTableViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
-    
+
     let searchBar = searchController.searchBar
     filterContentForSearchText(searchBar.text!)
   }
