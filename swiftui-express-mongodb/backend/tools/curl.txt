@@ -1,0 +1,12 @@
+# GET Request
+curl -G http://localhost:5555/apps 
+
+
+# POST Request
+curl -d '{"AppName":"test","FileName":"test.mp3","Sha1":"test"}' -H 'Content-Type: application/json' http://localhost:5555/add
+
+# PUT Request
+curl -X PUT -d '{"FileName":"pcap","Sha1":"pcap Success"}'  -H 'Content-Type: application/json' http://localhost:5555/update/test
+
+# DELETE Request
+curl -X "DELETE" http://localhost:5555/delete/test
